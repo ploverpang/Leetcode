@@ -48,6 +48,7 @@ public:
 	}
 };
 
+/*
 int main()
 {
 	int a[] = {3,2,4};
@@ -58,3 +59,4 @@ int main()
 	system("PAUSE");
 	return 0;
 }
+*/
