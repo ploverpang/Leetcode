@@ -4,10 +4,11 @@
 
 using namespace std;
 
+
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
-		char LUT[9][4] = {
+		 char LUT[9][4] = {
 			{},
 			{'a','b','c'},
 			{'d','e','f'},
@@ -18,11 +19,12 @@ public:
 			{'t','u','v'},
 			{'w','x','y','z'}
 		};
-		vector<string> result;
-		return combination(digits, digits.size()-1, LUT, result);
+
+		vector<string> result = combination(digits, digits.size()-1, LUT);
+        return result;
     }
 
-	vector<string> combination(string digits, int index, char LUT[][4], vector<string> &vecStr)
+	vector<string> combination(string digits, int index, char LUT[][4])
 	{
 		int num = digits[index]-'0';
 
@@ -40,16 +42,17 @@ public:
 			nLetterCandidate =3;
 		}
 
+        vector<string> vecStr;
 		if (index == 0)
 		{
 			for (int j = 0; j < nLetterCandidate; j++)
 			{
 				vecStr.push_back(string(LUT[num-1][j],1));
-			}
+            }
 			return vecStr;
 		}
 
-		vecStr = combination(digits, index-1, LUT, vecStr);
+		vecStr = combination(digits, index-1, LUT);
 		vector<string> copyVecStr(vecStr);
 		vecStr.clear();
 
