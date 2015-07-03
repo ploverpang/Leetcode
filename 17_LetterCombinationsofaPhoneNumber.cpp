@@ -1,14 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include <map>
 using namespace std;
 
 
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
-		 char LUT[9][4] = {
+        vector<string> result;
+        if(digits.empty())
+            return result;
+         char LUT[9][4] = {
 			{},
 			{'a','b','c'},
 			{'d','e','f'},
@@ -20,11 +23,11 @@ public:
 			{'w','x','y','z'}
 		};
 
-		vector<string> result = combination(digits, digits.size()-1, LUT);
+        result = combination(digits, digits.size()-1, LUT);
         return result;
     }
 
-	vector<string> combination(string digits, int index, char LUT[][4])
+	vector<string> combination(string digits, int index, char LUT[9][4])
 	{
 		int num = digits[index]-'0';
 
@@ -47,7 +50,7 @@ public:
 		{
 			for (int j = 0; j < nLetterCandidate; j++)
 			{
-				vecStr.push_back(string(LUT[num-1][j],1));
+				vecStr.push_back(string(1,LUT[num-1][j]));
             }
 			return vecStr;
 		}
@@ -61,7 +64,8 @@ public:
 			string str = copyVecStr[i];
 			for (int j = 0; j < nLetterCandidate; j++)
 			{
-				vecStr.push_back(str.append(string(LUT[num-1][j], 1)));	
+                string strTmp = str + string(1, LUT[num-1][j]);
+				vecStr.push_back(strTmp);	
 			}
 		}
 		return vecStr;
