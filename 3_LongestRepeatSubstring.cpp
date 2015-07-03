@@ -29,6 +29,7 @@ public:
     }
 };
 
+/*
 int main()
 {
 	string a("123214311");
@@ -36,3 +37,4 @@ int main()
 	cout << sls.lengthOfLongestSubstring(a) << endl;
 	system("PAUSE");
 }
+*/
