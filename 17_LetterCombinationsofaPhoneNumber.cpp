@@ -7,11 +7,11 @@ using namespace std;
 
 class Solution {
 public:
-    vector<string> letterCombinations(string digits) {
-        vector<string> result;
-        if(digits.empty())
-            return result;
-         char LUT[9][4] = {
+	vector<string> letterCombinations(string digits) {
+		vector<string> result;
+		if(digits.empty())
+			return result;
+		char LUT[9][4] = {
 			{},
 			{'a','b','c'},
 			{'d','e','f'},
@@ -23,9 +23,9 @@ public:
 			{'w','x','y','z'}
 		};
 
-        result = combination(digits, digits.size()-1, LUT);
-        return result;
-    }
+		result = combination(digits, digits.size()-1, LUT);
+		return result;
+	}
 
 	vector<string> combination(string digits, int index, char LUT[9][4])
 	{
@@ -45,13 +45,13 @@ public:
 			nLetterCandidate =3;
 		}
 
-        vector<string> vecStr;
+		vector<string> vecStr;
 		if (index == 0)
 		{
 			for (int j = 0; j < nLetterCandidate; j++)
 			{
 				vecStr.push_back(string(1,LUT[num-1][j]));
-            }
+			}
 			return vecStr;
 		}
 
@@ -64,7 +64,7 @@ public:
 			string str = copyVecStr[i];
 			for (int j = 0; j < nLetterCandidate; j++)
 			{
-                string strTmp = str + string(1, LUT[num-1][j]);
+				string strTmp = str + string(1, LUT[num-1][j]);
 				vecStr.push_back(strTmp);	
 			}
 		}
@@ -72,6 +72,7 @@ public:
 	}
 };
 
+/*
 int main()
 {
 	string digits("23");
@@ -84,3 +85,4 @@ int main()
 	system("PAUSE");
 	return 0;
 }
+*/

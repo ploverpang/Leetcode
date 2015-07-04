@@ -67,13 +67,45 @@ public:
 			else
 				break;
 		}
-/*
-		for (int i = 0; i < length; i++)
-		{
-
-		}
-	*/
 		return true;
+	}
+
+	vector<string> removeStar(string p, int star_pos, int remain, vector<string> &vecStr)
+	{
+		if (star_pos == -1)
+		{
+			return vecStr;
+		}
+		if (star_pos == 0)
+		{
+			star_pos = p.rfind('*');
+		}
+
+		int pos; 
+		if (string::npos == p.rfind('*', star_pos-1))
+		{
+			pos = -1;
+		}
+		else
+		{
+			pos = p.rfind('*', star_pos-1);	
+		}
+
+		vector<string> copyedVec;
+		for (int k = 0; k <= remain; k++)
+		{
+			vecStr = removeStar(p, pos, remain-k, vecStr);
+			//vecStr.clear();
+
+			string replacedLetter(k, p[star_pos-1]);
+			for (int i = 0; i < vecStr.size(); i++)
+			{
+				string clonedStr = vecStr[i];
+				copyedVec.push_back(clonedStr.replace(star_pos, 1, replacedLetter));
+			}
+		}
+		vecStr.swap(copyedVec);
+		return vecStr;
 	}
 };
 
@@ -97,14 +129,18 @@ void fun(vector<char> person, int personIndex, int remainApple)
 /*
 void main()
 {
-	vector<char> person;
-	person.push_back('a');
-	person.push_back('b');
-	person.push_back('c');
-	fun(person, 0, 3);
-
-
 	Solution sln;
+	vector<string> result;
+	string p("a*b*c");
+	result.push_back(p);
+
+	string q(0, '1');
+	cout << q << endl;
+	result  = sln.removeStar(p, 0, 2, result);
+	for (int i = 0; i < result.size(); i++)
+	{
+		cout << result[i] << endl;
+	}
 	cout << sln.isMatch("aaa", "ab*a*c*a") << endl;
 	system("PAUSE");
 }
