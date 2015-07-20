@@ -50,7 +50,7 @@ public:
 		return str;
 	}
 };
-
+/*
 int main()
 {
 	vector<string> result;
@@ -63,3 +63,4 @@ int main()
 	system("PAUSE");
 	return 0;
 }
+*/
