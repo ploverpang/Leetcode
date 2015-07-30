@@ -67,13 +67,12 @@ public:
 		return result > INT_MAX ? INT_MAX : result;
     }
 };
-
+/*
 int main()
 {
 	Solution sln;
-	decltype(sln.divide) a = 1;
-	cout << a <<endl;
 	cout << sln.divide(-2147483648, -1) << endl;
 	system("PAUSE");
 	return 0;
 }
+*/

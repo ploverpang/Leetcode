@@ -10,45 +10,72 @@ public:
 	vector<string> generateParenthesis(int n)
 	{
 		vector<string> result;
-		result.push_back(string(""));
-		return process(n, result);	
+		result.push_back("");
+		vector<pair<int, int>> leftAndRightNum;
+		leftAndRightNum.push_back(make_pair(0,0));
+		for (int k = 0; k < 2*n; k++)
+		{
+			vector<string> copyResult(result);
+			vector<pair<int, int>> copyLR(leftAndRightNum);
+			result.clear();
+			leftAndRightNum.clear();
+
+			for (int i = 0; i < copyResult.size(); i++)
+			{
+				if (copyLR[i].first < n)
+				{
+					result.push_back(copyResult[i]+"(");
+					leftAndRightNum.push_back(make_pair(copyLR[i].first+1, copyLR[i].second));
+				}
+
+				if (copyLR[i].first > copyLR[i].second)
+				{
+					result.push_back(copyResult[i]+")");
+					leftAndRightNum.push_back(make_pair(copyLR[i].first, copyLR[i].second+1));
+				}	
+			}
+		}
+		return result;
 	}
 
-	vector<string> process(int k, vector<string> vecStr) 
+	vector<string> generateParenthesis1(int n)
 	{
-		if (k == 0)
+		vector<string> result;
+		result.push_back(string(""));
+		return process(result, n, n);	
+	}
+
+	vector<string> process(vector<string> &vecStr, int left, int right) 
+	{
+		if (left == 0 && right == 0)
 		{
 			return vecStr;
 		}
-
-		vector<string> copyVecStr(vecStr);
-		vecStr.clear();
-		for (int i = 1; i <= k; i++)
+		
+		vector<string> vecStrCopy(vecStr);
+		vector<string> processResult;
+		if (left > 0)
 		{
-			vector<string> vecFromBefore = process(k-i, copyVecStr);
-			string parenthesis = generateP(i);
-			for (int j = 0; j < vecFromBefore.size(); j++)
+			vector<string> leftBefore = process(vecStrCopy, left-1, right);
+			for (int i = 0; i < leftBefore.size(); i++)
 			{
-				string oneStr = vecFromBefore[j] + parenthesis; 
-				vecStr.push_back(oneStr);
+				leftBefore[i] += "(";	
+				processResult.push_back(leftBefore[i]);
 			}
 		}
-		return vecStr;
+		if (right > left && right > 0)
+		{
+			vector<string> rightBefore = process(vecStrCopy, left, right-1);
+			for (int i = 0; i < rightBefore.size(); i++)
+			{
+				rightBefore[i] += ")";	
+				processResult.push_back(rightBefore[i]);
+			}
+		}
+		vecStr.swap(processResult);
+		return processResult;
 	}
 
-	string generateP(int n)
-	{
-		string str;
-		for (int i = 0; i < n; i++)
-		{
-			str += string(1, '(');	
-		}
-		for (int i = 0; i < n; i++)
-		{
-			str += string(1, ')');	
-		}
-		return str;
-	}
 };
 /*
 int main()
