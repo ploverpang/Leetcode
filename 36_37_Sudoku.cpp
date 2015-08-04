@@ -56,6 +56,13 @@ public:
 
 		board[y][x]=val;
 		valRecord[index]=val;
+		/*
+		for (int i = 0; i < valRecord.size(); i++)
+		{
+			cout << valRecord[i] << " ";
+		}
+		cout << endl;
+		*/
 
 		if(isValidSudoku(board))
 		{ 
@@ -69,12 +76,8 @@ public:
 			if (val == '9')
 			{
 				int lastNotNine = index-1;	
-				while (lastNotNine >= 0 )
+				while (lastNotNine >= 0  && valRecord[lastNotNine] == '9')
 				{
-					if (valRecord[lastNotNine] != '9')
-					{
-						break;
-					}
 					lastNotNine--;
 				}
 
@@ -163,6 +166,7 @@ void print2DArray(vector<vector<char>> arr)
 	}
 }
 
+/*
 int main()
 {
 	char arr[9][9] = {
@@ -190,3 +194,4 @@ int main()
 	system("PAUSE");
 	return 0;
 }
+*/
