@@ -71,7 +71,7 @@ public:
 protected:
 private:
 };
-
+//
 /*
 int main()
 {
