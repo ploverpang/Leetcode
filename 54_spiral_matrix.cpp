@@ -4,7 +4,7 @@
 using namespace std;
 
 class Solution {
-public:
+    public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         vector<int> result;
         if(matrix.empty())
@@ -39,7 +39,7 @@ public:
             {
                 result.push_back(matrix[b][x]);
             }
-            b--;
+            b++;
             if(t>b) break;
 
             for(int y=b; y>=t; y--)
