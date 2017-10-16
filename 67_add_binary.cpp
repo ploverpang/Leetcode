@@ -17,13 +17,28 @@ public:
         int i = lmax-1;
         int carry = 0;
 
-        while(ia>=0 && ib>= 0)
+        int aa, bb;
+        for(; i>=0; i--, ia--,ib--)
         {
-            result[i] = ((a[ia]-'0') ^ (b[ib]-'0') ^ (carry-'0'))+'0';
-            carry = (a[ia]=='1' && b[ib]=='1');
-            ia--;
-            ib--;
-            i--;
+            if(ia >=0 ) {
+                aa = a[ia]-'0';
+            }else {
+                aa = 0;
+            }
+
+            if(ib >=0 ) {
+                bb = b[ib]-'0';
+            }else {
+                bb = 0;
+            }
+
+            result[i] = (aa ^ bb ^ carry)+'0';
+            carry = (aa+bb+carry) >1;
+
+            cout<<"i:" << i<< "\tia:" << ia << "\tib:" << ib
+                <<"\ta:" <<a[ia] << "\tb:" << b[ib] << "\tresult:" << result[i]
+                << "\tcarry: " << carry << endl;
+
         }
         if(carry)
             result.insert(result.begin(), '1');
